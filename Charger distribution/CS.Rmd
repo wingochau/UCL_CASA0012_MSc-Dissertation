@@ -1,0 +1,101 @@
+---
+title: "CS"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+### Packages
+```{r}
+# packages
+library(spatstat)
+library(here)
+library(sp)
+library(rgeos)
+library(maptools)
+library(GISTools)
+library(tmap)
+library(sf)
+library(geojson)
+library(geojsonio)
+library(tmaptools)
+library(tidyverse)
+library(ggpubr)
+library(rmapshaper)
+library(janitor)
+library(sqldf)
+library(rgdal)
+library(tidymodels)
+library(stats)
+library(DiagrammeR)
+```
+
+
+### Reading data & sorting
+```{r}
+#Read charger location data
+hkcs_csv <- read_csv("EV_Charger_Locations_EPD.CSV")
+hkcs_csv <- clean_names(hkcs_csv)
+#Sort by alphabetic order
+hkpop_csv <- hkcs_csv[order(hkcs_csv$district_council_district),]
+
+#Read Hong Kong map
+HKdistricts <- st_read(here::here("Hong_Kong_18_Districts-shp", "HKDistrict18.shp")) %>%
+  st_transform(.,2326)
+#Sort by alphabetic order
+HKdistricts <- HKdistricts[order(HKdistricts$ENAME),]
+```
+
+### Producing visualisation
+```{r}
+#Adjusting charging station csv
+HKcs <- hkcs_csv[,4] %>%
+mutate(hkcs_csv[,1]) %>%
+dplyr::rename(ENAME= 'district_council_district') %>%
+mutate(hkcs_csv[,5]) %>%
+mutate(hkcs_csv[,6])
+
+#Change to SF
+hkcs_sf1 = st_as_sf(HKcs, coords = c("latitude","longitude"), crs = 2326)
+qtm(hkcs_sf1)
+
+#Function
+Joinfun <- function(data1, data2){
+
+output<- data1%>%
+  st_join(data2,.) 
+
+  return(output)
+}
+
+ChargingStation <- Joinfun(hkcs_sf1, HKdistricts)
+
+ChargingStation <-ChargingStation %>%
+mutate('ChargingStation count' = hkcs_sf1$total)
+```
+
+### Plots
+```{r pressure, echo=FALSE}
+
+
+
+# plot map
+tmap_mode("plot")
+# set the breaks
+# for our mapped data
+breaks = c(0, 100,150, 200, 250, 300, 830) 
+
+tm1 <- tm_shape(ChargingStation) + 
+  tm_polygons("ChargingStation count", 
+              breaks=breaks,
+              palette="BuPu", size=0.1)+
+  tm_legend(show=TRUE, position=c("left","top"), text.size=0.85)+
+  tm_layout(frame=FALSE)+
+  tm_compass(north=0, position=c("right","bottom")
+  
+  )
+tm1
+```
