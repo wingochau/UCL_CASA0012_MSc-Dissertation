@@ -1,5 +1,5 @@
-This repository is for the datasets used in the UCL dissertation, 
-which is the work of Lok Wing Chau at the University College London and in this 
+This repository contains the datasets used in the CASA0012 dissertation of MSc Spatial Data Science and Visualisation, 
+which is the work of Lok Wing Chau (Student ID: 19113428) at the University College London and in this 
 or similar form has not been nor is being submitted for any other qualification.
 
 
