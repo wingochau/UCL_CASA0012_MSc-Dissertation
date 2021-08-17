@@ -12,10 +12,6 @@ downloaded documents are categorised in different folders in this repository for
 
 Dataset details are as below:
 \
-HK Electric Company Charing Stations
-\
-https://data.gov.hk/en-data/dataset/hkelectric-tnd_cs_ci-hkelectric-ev-location
-
 First Registration in EV
 \
 https://www.td.gov.hk/tc/transport_in_hong_kong/transport_figures/monthly_traffic_and_transport_digest/index.html
