@@ -11,7 +11,6 @@ downloaded documents are categorised in different folders in this repository for
 
 
 Dataset details are as below:
-
 HK Electric Company Charing Stations
 \
 https://data.gov.hk/en-data/dataset/hkelectric-tnd_cs_ci-hkelectric-ev-location
