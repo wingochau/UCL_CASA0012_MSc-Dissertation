@@ -4,11 +4,10 @@ which is the work of Lok Wing Chau (Student ID: 19113428) at the University Coll
 In this or similar form has not been nor is being submitted for any other qualification.
 
 Note:
-\
 - The datasets for each aspect are publicly available online and
 downloaded documents are categorised in different folders in this repository for convenience.
 - For the first registration, a data preparation Python notebook is specifically produced for data cleaning and munging. 
-
+- To reproduce the result, please press "Run -> Run All Cells" in each Python notebook
 
 Dataset details are as below:
 \
